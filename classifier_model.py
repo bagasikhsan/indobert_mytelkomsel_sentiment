@@ -25,5 +25,5 @@ def klasifikasi_mytelkom(review):
   logits = model(subwords)[0]
   label = torch.topk(logits, k=1, dim=-1)[1].squeeze().item()
 
-  return i2w[label]
+  return i2w[label], f'{F.softmax(logits, dim=-1).squeeze()[label] * 100:.3f}%'
     
