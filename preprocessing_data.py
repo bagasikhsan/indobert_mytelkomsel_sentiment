@@ -44,7 +44,6 @@ def normalized_term(document):
 
 
 def preprocessing_mytelkom(review):
-  print(review)
   result = review.lower()   # mengubah teks ke huruf kecil
   result = cleaning(result)  
   result = regexp.tokenize(result)  # memisahkan kata-kata
