@@ -51,5 +51,6 @@ def preprocessing_mytelkom(review):
   result = stopwords_removal(result)
   result = [stemmer.stem(word) for word in result] # Stemming
   result = normalized_term(result)
+  result = " ".join(word for word in result)
 
   return result
