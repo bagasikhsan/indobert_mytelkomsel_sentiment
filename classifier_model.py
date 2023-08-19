@@ -2,13 +2,23 @@ from transformers import BertForSequenceClassification, BertTokenizer
 from preprocessing_data import preprocessing_mytelkom
 import torch
 import torch.nn.functional as F
+import streamlit as st
 
 
 model_path = r'bagas10/MyTelkomselSentimentBert'
 
+# Function to load model and tokenizer just once
+@st.cache
+def load_model():
+  return BertForSequenceClassification.from_pretrained(model_path)
+
+@st.cache
+def load_tokenizer():
+  return BertTokenizer.from_pretrained(model_path)
+
 # Load a trained model and vocabulary that you have fine-tuned
-model = BertForSequenceClassification.from_pretrained(model_path)
-tokenizer = BertTokenizer.from_pretrained(model_path)
+model = load_model()
+tokenizer = load_tokenizer()
 
 # Copy the model to the GPU.
 model.to('cpu')
